@@ -17,8 +17,7 @@
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
-    "express": "^5.2.1",
-    "supabase-js": "^0.0.1-security"
+    "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
