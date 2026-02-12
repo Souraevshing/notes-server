@@ -11,8 +11,9 @@
   "keywords": [],
   "author": "Codey",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
