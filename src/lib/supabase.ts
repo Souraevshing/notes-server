@@ -9,9 +9,6 @@ if (!supabaseUrl || !supabaseKey) {
   );
 }
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_KEY,
-);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default supabase;

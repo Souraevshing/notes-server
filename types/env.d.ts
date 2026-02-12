@@ -3,6 +3,7 @@ declare global {
     interface ProcessEnv {
       SUPABASE_URL: string;
       SUPABASE_KEY: string;
+      PORT: number;
     }
   }
 }
