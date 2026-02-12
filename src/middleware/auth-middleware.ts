@@ -11,7 +11,11 @@ declare global {
   }
 }
 
-async function authMiddleware(req: Request, res: Response, next: NextFunction) {
+const authMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res.status(401).json({ error: "No token provided" });
@@ -24,6 +28,6 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   req.user = data.user;
 
   next();
-}
+};
 
 export default authMiddleware;

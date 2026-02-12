@@ -1,19 +1,17 @@
-import express from "express";
+import { Request, Response } from "express";
 
 import supabase from "../../lib/supabase";
 
-const router = express.Router();
-
-router.post("/api/v1/auth/signup", async (req, res) => {
+const signUp = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) {
     return res.status(400).json({ error: error.message });
   }
   res.json(data);
-});
+};
 
-router.post("/api/v1/auth/signin", async (req, res) => {
+const signIn = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -23,4 +21,7 @@ router.post("/api/v1/auth/signin", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
   res.json(data);
-});
+};
+
+export { signIn, signUp };
+
