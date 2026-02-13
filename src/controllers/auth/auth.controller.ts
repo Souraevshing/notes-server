@@ -8,7 +8,7 @@ const signUp = async (req: Request, res: Response) => {
   if (error) {
     return res.status(400).json({ error: error.message });
   }
-  res.json(data);
+  return res.json(data);
 };
 
 const signIn = async (req: Request, res: Response) => {
@@ -20,8 +20,7 @@ const signIn = async (req: Request, res: Response) => {
   if (error) {
     return res.status(400).json({ error: error.message });
   }
-  res.json(data);
+  return res.json(data);
 };
 
 export { signIn, signUp };
-
