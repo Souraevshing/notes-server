@@ -6,7 +6,8 @@ const createNote = async (req: Request, res: Response) => {
   const { title, content } = req.body;
   const { data, error } = await supabase
     .from("notes")
-    .insert([{ title, content, user_id: req.user?.id }]);
+    .insert([{ title, content, user_id: req.user?.id }])
+    .select();
   if (error) return res.status(400).json({ error: error.message });
   return res.json(data);
 };
@@ -22,12 +23,21 @@ const getNotes = async (req: Request, res: Response) => {
 
 const updateNote = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, content } = req.body;
+  const { title, content, is_favorite } = req.body;
+  const userId = req.user?.id;
+
+  const updateData: any = {};
+  if (title !== undefined) updateData.title = title;
+  if (content !== undefined) updateData.content = content;
+  if (is_favorite !== undefined) updateData.is_favorite = is_favorite;
+
   const { data, error } = await supabase
     .from("notes")
-    .update({ title, content })
+    .update(updateData)
     .eq("id", id)
-    .eq("user_id", req.user?.id);
+    .eq("user_id", userId)
+    .select();
+
   if (error) return res.status(400).json({ error: error.message });
   return res.json(data);
 };
@@ -38,7 +48,8 @@ const deleteNote = async (req: Request, res: Response) => {
     .from("notes")
     .delete()
     .eq("id", id)
-    .eq("user_id", req.user?.id);
+    .eq("user_id", req.user?.id)
+    .select();
   if (error) return res.status(400).json({ error: error.message });
   return res.json(data);
 };
